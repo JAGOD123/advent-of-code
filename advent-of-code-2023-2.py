@@ -35,11 +35,36 @@ def vaild_games(game_arr_dict):
             
     return game_arr
                 
+def minimum_cubes(game_arr_dict):
+    # list of list of dicts, for each game get the buggest numberfor each column
+    power_arr = []
+    for game in game_arr_dict:
+        d = {"red": 0, "green": 0, "blue": 0}
+        for d_n in game:
+            if d.get("red") < d_n.get("red"):
+                d["red"] = d_n.get("red")
+            if d.get("green") < d_n.get("green"):
+                d["green"] = d_n.get("green")
+            if d.get("blue") < d_n.get("blue"):
+                d["blue"] = d_n.get("blue")
 
+        print(d)
+        num = 1
+        for colour, val in d.items():
+            if val == 0: 
+                continue
+            num *= val
+        print(num)
+        power_arr.append(num)
+    return power_arr
+            
 
 
 file = process_file("input_2.txt")
 games = vaild_games(file)
 print(sum(games))
+
+minimum_arr = minimum_cubes(file)
+print(sum(minimum_arr))
 
 
